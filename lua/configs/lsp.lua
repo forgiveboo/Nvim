@@ -1,24 +1,20 @@
--- load defaults i.e lua_lsp
-require("nvchad.configs.lspconfig").defaults()
-
 local lspconfig = require "lspconfig"
+local mr = require "mason-registry" -- 这行目前没什么用，之后会用上
 
--- EXAMPLE
-local servers = { "html", "cssls" }
 local nvlsp = require "nvchad.configs.lspconfig"
 
--- lsps with default config
-for _, lsp in ipairs(servers) do
-  lspconfig[lsp].setup {
-    on_attach = nvlsp.on_attach,
-    on_init = nvlsp.on_init,
-    capabilities = nvlsp.capabilities,
-  }
-end
+---@type MasonLspconfigSettings
+local options = {
+  handlers = {
+    function(server_name)
+      ---@diagnostic disable-next-line: undefined-field
+      lspconfig[server_name].setup {
+        on_attach = nvlsp.on_attach,
+        on_init = nvlsp.on_init,
+        capabilities = nvlsp.capabilities,
+      }
+    end,
+  },
+}
 
--- configuring single server, example: typescript
--- lspconfig.ts_ls.setup {
---   on_attach = nvlsp.on_attach,
---   on_init = nvlsp.on_init,
---   capabilities = nvlsp.capabilities,
--- }
+return options
