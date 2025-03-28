@@ -190,6 +190,24 @@ local options = {
             enable = true,
           },
         },
+        Java = {
+          hint = {
+            enable = true,
+            paramName = "Literal",
+          },
+          codeLens = {
+            enable = true,
+          },
+        },
+        Python = {
+          hint = {
+            enable = true,
+            paramName = "Literal",
+          },
+          codeLens = {
+            enable = true,
+          },
+        },
       }
 
       -- If current working directory is Neovim config directory
